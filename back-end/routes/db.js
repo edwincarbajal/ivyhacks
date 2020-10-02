@@ -5,7 +5,7 @@ const Cloudant = require("@cloudant/cloudant");
 
 router.get("/", function(req, res, next) {
   //cloudant
-  cloudant();
+
   async function cloudant() {
     console.log("cloudant tutorial");
     try {
@@ -27,19 +27,41 @@ router.get("/", function(req, res, next) {
       console.log("Setting the db that we are going to use!");
       const db = cloudant.db.use("ivy-hacks");
 
-      const doc0 = {"id":"canidae:dog", "name":"dog"};
+      const doc0 = {"_id":"class:323",
+        "name": "Algorithms",
+        "lectures":[
+          [
+            {"author":"Jairo", "sections":["title 1", "title2"], "texts":["text 1", "text 2"]},
+            {"author":"Raymond", "sections":["title 1", "title2"], "texts":["text 1", "text 2"]}
+          ],
+          [
+            {"author":"Edwin", "sections":["title 1", "title2"], "texts":["text 1", "text 2"]},
+            {"author":"Jinay", "sections":["title 1", "title2"], "texts":["text 1", "text 2"]}
+          ]
+        ]
+      };
       let res ="";
 
-      res = await db.insert(doc0);
+      // res = await db.insert(doc0);
+      // console.log(`Added doc to db`);
+      // console.log(res);
 
-      console.log(`Added doc to db ${res}`);
+      console.log("Get doc from db");
+      res = await db.get(doc0._id);
+      console.log(res.lectures[0][1].author);
+      return res.lectures[0][1].author;
 
     } catch(err){
       console.error(`Error -> ${error}`);
     }
   }
+cloudant().then((data) => {
+  res.send(data);//work
+}).catch((err) => {
+  res.send("Didnt get data");
+});
 
-res.send("API is working properly")
+
 });
 
 module.exports = router;
