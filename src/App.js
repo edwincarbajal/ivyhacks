@@ -1,6 +1,8 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Editor from "./components/Editor";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
   return (
@@ -18,6 +20,14 @@ function App() {
         >
           Learn React
         </a>
+        <Router>
+          <Switch>
+            // TODO: Add route for root, e.g "/" and render homepage component
+            <Route path="/editor">
+              <Editor />
+            </Route>
+          </Switch>
+        </Router>
       </header>
     </div>
   );
