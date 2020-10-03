@@ -11,10 +11,11 @@ router.get("/", function(req, res, next) {
       for(var i = 0; i < res.lectures.length; i++) {
         arr.push({
           id: i,
-          title: res.lectures[i].title
+          title: res.lectures[i].title,
+          date: res.lectures[i].date
         });
       }
-
+      
       return JSON.stringify(arr);
 
     } catch(err){
