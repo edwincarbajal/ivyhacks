@@ -8,11 +8,11 @@ import {
 } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 
-function CourseCard({ title, description }) {
+function CourseCard({ title, description, id }) {
     const history = useHistory();
 
     function navigate() {
-        history.push('/class/32489')
+        history.push(`/class/${id}`)
     }
 
     return (

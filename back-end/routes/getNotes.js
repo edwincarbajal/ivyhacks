@@ -7,7 +7,18 @@ router.get("/", function(req, res, next) {
     try {
       let res = await db.get(req.query.class);
 
-      return JSON.stringify(res.lectures[req.query.lecture].notes);
+
+      let lecture = res.lectures[req.query.lecture];
+
+      let result = {
+        title: lecture.title,
+        date: lecture.date,
+        course: res.name,
+        notes: lecture.notes,
+      }
+      console.log(result);
+
+      return JSON.stringify(result);
 
     } catch(err){
       console.error(`Error -> ${error}`);

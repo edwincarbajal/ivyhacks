@@ -31,7 +31,6 @@ class App extends React.Component {
         <p>{this.state.apiResponse}</p>
         <Router>
           <Switch>
-            // TODO: Add route for root, e.g "/" and render homepage component
             <Route exact path="/">
               <Dashboard />
             </Route>
@@ -44,10 +43,10 @@ class App extends React.Component {
             <Route path="/dashboard">
               <Dashboard />
               </Route>
-            <Route path="/class/:id/:lectureId">
+            <Route path="/class/:classId/:lectureId">
               <Lecture />
             </Route>
-            <Route path="/class/:id">
+            <Route path="/class/:classId">
               <Class />
             </Route>
             <Route path="/Login">

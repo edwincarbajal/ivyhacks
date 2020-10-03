@@ -2,13 +2,16 @@ import { CloudDownloadOutlined, EyeOutlined } from "@ant-design/icons";
 import { Card, Avatar } from "antd";
 import React from "react";
 
-function NotesCard() {
+function NotesCard({ author, date }) {
+
+    let getInitials = (name) => name.split(" ").map(x => x[0].toUpperCase());
+
     return (
         <Card hoverable actions={[<CloudDownloadOutlined />, <EyeOutlined />]}>
             <Card.Meta
-                title="Jinay Jain"
-                description="9/23/20"
-                avatar={<Avatar>JJ</Avatar>}
+                title={author}
+                description={date}
+                avatar={<Avatar>{getInitials(author)}</Avatar>}
             ></Card.Meta>
         </Card>
     );

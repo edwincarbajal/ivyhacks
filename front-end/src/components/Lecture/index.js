@@ -5,44 +5,35 @@ import {
     StarTwoTone,
 } from "@ant-design/icons";
 import { Card, Col, Layout, Row } from "antd";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import NotesCard from "../Dashboard/NotesCard";
+import axios from "axios";
 
 const { Content } = Layout;
 
-const lectureInfo = {
-    title: "Python Basics",
-    course: "Introduction to Computer Science",
-    notes: [
-        {
-            id: 1,
-            author: "Jinay Jain",
-        },
-        {
-            id: 2,
-            author: "Jinay Jain",
-        },
-        {
-            id: 3,
-            author: "Jinay Jain",
-        },
-        {
-            id: 4,
-            author: "Jinay Jain",
-        },
-    ],
-};
-
 function Lecture() {
+
+    const { classId, lectureId } = useParams();
+
+    const [lecture, setLecture] = useState({notes: []})
+
+    useEffect(() => {
+        async function getData() {
+            const result = await axios.get(`http://localhost:9000/getNotes?class=${classId}&lecture=${lectureId}`)
+            setLecture(result.data)
+        }
+
+        getData();
+    }, [classId, lectureId])
+
     return (
         <Layout style={{ minHeight: "100vh" }}>
             <Content style={{ margin: "24px" }}>
-                <Link to="/">
-                    <ArrowLeftOutlined /> Back to {lectureInfo.course}
+                <Link to={`/class/${classId}`}>
+                    <ArrowLeftOutlined /> Back to {lecture.course}
                 </Link>
-                <h1>{lectureInfo.title}</h1>
-                <h3>{lectureInfo.course}</h3>
+                <h1>{lecture.title} - {lecture.course}</h1>
                 <Row gutter={[24, 16]}>
                     <Col span={8}>
                         <Card
@@ -55,13 +46,13 @@ function Lecture() {
                             <Card.Meta
                                 title="Study Guide"
                                 avatar={<StarTwoTone twoToneColor="#bfbf2c" />}
-                                description="9/23/20"
+                                description="Combined notes from the entire class"
                             ></Card.Meta>
                         </Card>
                     </Col>
-                    {lectureInfo.notes.map((note) => (
+                    {lecture.notes.map((note) => (
                         <Col key={note.id} span={8}>
-                            <NotesCard />
+                            <NotesCard author={note.author} date="Student" />
                         </Col>
                     ))}
                 </Row>

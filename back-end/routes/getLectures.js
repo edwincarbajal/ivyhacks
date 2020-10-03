@@ -15,15 +15,12 @@ router.get("/", function(req, res, next) {
           date: res.lectures[i].date
         });
       }
-      console.log(arr);
 
       let result = {
         name: res.name,
         desc: res.description,
         lectures: arr
       }
-
-      console.log(result);
 
       return JSON.stringify(result);
 

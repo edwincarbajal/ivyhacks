@@ -1,40 +1,26 @@
 import styles from "./Dashboard.module.css";
-
+import axios from "axios";
 import { Button, Card, Col, Layout, Row, Form, Modal, Input } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CourseCard from "./CourseCard";
-import { Link } from 'react-router-dom';
-import fire from '../../firebase';
+import fire from "../../firebase";
 import Avatar from "antd/lib/avatar/avatar";
 import { LogoutOutlined, PlusOutlined } from "@ant-design/icons";
 
 const { Content } = Layout;
 
-const classes = [
-    {
-        title: "Calculus I",
-        description: "Fundamental of derivatives, integrals, and limits",
-    },
-    {
-        title: "Introduction to Computer Science",
-        description:
-            "Introduction to programming in Python. Topics covered: Functions, loops, arrays, variables, objects",
-    },
-    {
-        title: "Literature in Modern History",
-        description:
-            "An overview of how great novels and stories have shaped modern thought and historical significance",
-    },
-    {
-        title: "Introduction to Economics",
-        description:
-            "Psychology at a large scale, introductory micro and macro economic material",
-    },
-];
-
 function Dashboard() {
-    let [visible, setVisible] = useState(false);
-    let [form] = Form.useForm();
+    const [classes, setClasses] = useState([]);
+    const [visible, setVisible] = useState(false);
+    const [form] = Form.useForm();
+
+    useEffect(() => {
+        async function getClasses() {
+            const result = await axios.get("http://localhost:9000/getClasses");
+            setClasses(result.data);
+        }
+        getClasses();
+    }, []);
 
     function createClass(values) {
         console.log(values);
@@ -43,7 +29,7 @@ function Dashboard() {
 
     function onLogout() {
         Modal.confirm({
-            title: 'Are you sure you want to logout?',
+            title: "Are you sure you want to logout?",
             icon: <LogoutOutlined />,
             onOk() {
                 fire.auth().signOut();
@@ -51,8 +37,8 @@ function Dashboard() {
             },
             onCancel() {
                 console.log("cancelled logout");
-            }
-        })
+            },
+        });
     }
 
     return (
@@ -65,10 +51,11 @@ function Dashboard() {
                         {/* TODO: Add breadcrumbs navigation information */}
                         <Row gutter={[24, 16]}>
                             {classes.map((c) => (
-                                <Col key={c.title} span={8}>
+                                <Col key={c.id} span={8}>
                                     <CourseCard
-                                        title={c.title}
-                                        description={c.description}
+                                        title={c.name}
+                                        description={c.desc}
+                                        id={c.id}
                                     />
                                 </Col>
                             ))}
@@ -127,7 +114,9 @@ function Dashboard() {
                                 </Form>
                             </Modal>
                             <br />
-                            <Button danger onClick={onLogout}>Logout</Button>
+                            <Button danger onClick={onLogout}>
+                                Logout
+                            </Button>
                         </Card>
                     </Col>
                 </Row>
