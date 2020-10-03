@@ -4,6 +4,7 @@ import Editor from "./components/Editor";
 import logo from "./logo.svg";
 import "./App.css";
 import Dashboard from "./components/Dashboard";
+import Class from "./components/Class";
 
 class App extends React.Component {
   constructor(props) {
@@ -28,11 +29,14 @@ class App extends React.Component {
         <Router>
           <Switch>
             // TODO: Add route for root, e.g "/" and render homepage component
-            <Route path="/">
+            <Route exact path="/">
               <Dashboard />
             </Route>
             <Route path="/editor">
               <Editor />
+            </Route>
+            <Route path="/class/:id">
+              <Class />
             </Route>
           </Switch>
         </Router>

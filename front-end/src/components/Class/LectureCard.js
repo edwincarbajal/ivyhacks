@@ -1,4 +1,4 @@
-import { CalendarOutlined } from "@ant-design/icons";
+import { CalendarTwoTone } from "@ant-design/icons";
 import { Card } from "antd";
 import React from "react";
 
@@ -8,7 +8,7 @@ function LectureCard({ title, date }) {
             <Card.Meta
                 title={title}
                 description={date}
-                avatar={<CalendarOutlined />}
+                avatar={<CalendarTwoTone />}
             ></Card.Meta>
         </Card>
     );
