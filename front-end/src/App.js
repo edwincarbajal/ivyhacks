@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Editor from "./components/Editor";
-import logo from "./logo.svg";
 import "./App.css";
 import Dashboard from "./components/Dashboard";
 import Class from "./components/Class";
@@ -13,14 +12,14 @@ class App extends React.Component {
     this.state = { apiResponse: "" };
   }
 
-  callAPI() {
-    fetch("http://localhost:9000/db")
-    .then(res=>res.text())
-    .then(res=>this.setState({apiResponse: res}));
-  }
+  getData() {
+    fetch("http://localhost:9000/getLectures?class=CSC:323")
+  .then(res=>res.text())
+  .then(res=>this.setState({apiResponse: res}));
+}
 
-  componentWillMount() {
-    this.callAPI();
+  componentDidMount() {
+    this.getData();
   }
 
   render() {

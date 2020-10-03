@@ -4,9 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-dbRouter = require ("./routes/db");
+//custom endpoints
+getClassesRouter = require ("./routes/getClasses");
+getLecturesRouter = require ("./routes/getLectures");
+getNotesRouter = require ("./routes/getNotes");
+addClassRouter = require ("./routes/addClass");
+addLectureRouter = require ("./routes/addLecture");
+addNoteRouter = require ("./routes/addNote");
+
 var app = express();
 
 // view engine setup
@@ -22,7 +30,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use("/db", dbRouter);
+app.use("/getClasses", getClassesRouter);
+app.use("/getNotes", getNotesRouter);
+app.use("/getLectures", getLecturesRouter);
+app.use("/addClass", addClassRouter);
+app.use("/addLecture", addLectureRouter);
+app.use("/addNote", addNoteRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
