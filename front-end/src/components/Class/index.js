@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined, PlusOutlined } from "@ant-design/icons";
-import { Layout, Row, Col, Button, Modal, Form, Input, DatePicker } from "antd";
+import { Layout, Row, Col, Button, Modal, Form, Input, DatePicker, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import LectureCard from "./LectureCard";
@@ -13,14 +13,24 @@ function Class() {
     const [form] = Form.useForm();
     let { classId } = useParams();
 
-    useEffect(() => {
-        async function getClass() {
-            const result = await axios.get(`http://localhost:9000/getLectures?class=${classId}`)
-            setInfo(result.data);
-        }
+    async function getClass() {
+        const result = await axios.get(`http://localhost:9000/getLectures?class=${classId}`)
+        setInfo(result.data);
+    }
 
+    useEffect(() => {
         getClass();
     }, [classId])
+
+    async function createLecture(values) {
+        await axios.post('http://localhost:9000/addLecture', {
+            lecTitle: values.name,
+            lecDate: values.date.unix(),
+            classID: classId,
+        })
+        message.success("Lecture created!")
+        getClass();
+    }
 
     return (
         <Layout style={{ minHeight: "100vh" }}>
@@ -43,7 +53,7 @@ function Class() {
                     onCancel={() => setVisible(false)}
                     onOk={() => {
                         form.validateFields().then(values => {
-                            console.log(values);
+                            createLecture(values);
                             setVisible(false);
                         }).catch(err => console.log(err))
                     }}
