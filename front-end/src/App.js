@@ -5,6 +5,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Dashboard from "./components/Dashboard";
 import Class from "./components/Class";
+import Lecture from "./components/Lecture";
 
 class App extends React.Component {
   constructor(props) {
@@ -34,6 +35,9 @@ class App extends React.Component {
             </Route>
             <Route path="/editor">
               <Editor />
+            </Route>
+            <Route path="/class/:id/:lectureId">
+              <Lecture />
             </Route>
             <Route path="/class/:id">
               <Class />

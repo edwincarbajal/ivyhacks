@@ -81,7 +81,7 @@ function Class() {
                 </Modal>
                 <Row gutter={[24, 16]}>
                     {courseInfo.lectures.map((lecture) => (
-                        <Col span={8}>
+                        <Col key={lecture.id} span={8}>
                             <LectureCard
                                 title={lecture.title}
                                 date={lecture.date}
