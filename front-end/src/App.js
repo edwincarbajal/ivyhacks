@@ -10,14 +10,14 @@ class App extends React.Component {
     this.state = { apiResponse: "" };
   }
 
-  callAPI() {
-    fetch("http://localhost:9000/db")
-    .then(res=>res.text())
-    .then(res=>this.setState({apiResponse: res}));
-  }
+  getData() {
+    fetch("http://localhost:9000/getLectures?class=CSC:323")
+  .then(res=>res.text())
+  .then(res=>this.setState({apiResponse: res}));
+}
 
-  componentWillMount() {
-    this.callAPI();
+  componentDidMount() {
+    this.getData();
   }
 
   render() {
