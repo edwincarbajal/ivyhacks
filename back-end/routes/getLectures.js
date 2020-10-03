@@ -7,7 +7,7 @@ router.get("/", function(req, res, next) {
     try {
       let res = await db.get(req.query.class);
 
-      var arr = [];
+      var arr = [res.name, res.description];
       for(var i = 0; i < res.lectures.length; i++) {
         arr.push({
           id: i,
@@ -15,7 +15,7 @@ router.get("/", function(req, res, next) {
           date: res.lectures[i].date
         });
       }
-      
+      console.log(arr);
       return JSON.stringify(arr);
 
     } catch(err){
