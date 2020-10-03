@@ -3,6 +3,8 @@ import styles from "./Dashboard.module.css";
 import { Button, Card, Col, Layout, Row, Form, Modal, Input } from "antd";
 import React, { useState } from "react";
 import CourseCard from "./CourseCard";
+import { Link } from 'react-router-dom';
+import fire from '../../firebase';
 import Avatar from "antd/lib/avatar/avatar";
 import { LogoutOutlined, PlusOutlined } from "@ant-design/icons";
 
@@ -44,7 +46,8 @@ function Dashboard() {
             title: 'Are you sure you want to logout?',
             icon: <LogoutOutlined />,
             onOk() {
-                console.log("logging out");
+                fire.auth().signOut();
+                window.location.href = "/";
             },
             onCancel() {
                 console.log("cancelled logout");
