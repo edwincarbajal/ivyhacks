@@ -8,7 +8,6 @@ function LectureCard({ title, date, id, classId }) {
 
     function showDate(date) {
         let obj = new Date(parseInt(date) * 1000);
-        console.log(obj);
         return obj.toLocaleDateString();
     }
 

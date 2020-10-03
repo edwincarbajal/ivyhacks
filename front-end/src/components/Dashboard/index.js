@@ -1,6 +1,6 @@
 import styles from "./Dashboard.module.css";
 import axios from "axios";
-import { Button, Card, Col, Layout, Row, Form, Modal, Input } from "antd";
+import { Button, Card, Col, Layout, Row, Form, Modal, Input, message } from "antd";
 import React, { useEffect, useState } from "react";
 import CourseCard from "./CourseCard";
 import fire from "../../firebase";
@@ -14,16 +14,23 @@ function Dashboard() {
     const [visible, setVisible] = useState(false);
     const [form] = Form.useForm();
 
+    async function getClasses() {
+        const result = await axios.get("http://localhost:9000/getClasses");
+        setClasses(result.data);
+    }
+
     useEffect(() => {
-        async function getClasses() {
-            const result = await axios.get("http://localhost:9000/getClasses");
-            setClasses(result.data);
-        }
         getClasses();
     }, []);
 
-    function createClass(values) {
-        console.log(values);
+    async function createClass(values) {
+        await axios.post("http://localhost:9000/addClass", {
+            classID: values.id,
+            className: values.name,
+            classDesc: values.description,
+        });
+        getClasses();
+        message.success("Class created!")
         setVisible(false);
     }
 
@@ -99,6 +106,19 @@ function Dashboard() {
                                                 required: true,
                                                 message:
                                                     "Please enter the class name",
+                                            },
+                                        ]}
+                                    >
+                                        <Input />
+                                    </Form.Item>
+                                    <Form.Item
+                                        label="Course ID"
+                                        name="id"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message:
+                                                    "Please enter the class ID",
                                             },
                                         ]}
                                     >
