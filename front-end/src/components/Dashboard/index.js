@@ -47,7 +47,7 @@ function Dashboard() {
             icon: <LogoutOutlined />,
             onOk() {
                 fire.auth().signOut();
-                window.location.href = "/";
+                window.location.href = "/login";
             },
             onCancel() {
                 console.log("cancelled logout");
