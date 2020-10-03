@@ -1,6 +1,8 @@
 import { Col, Layout, Row } from "antd";
 import React from "react";
 import CourseCard from "./CourseCard";
+import { Link } from 'react-router-dom';
+import fire from '../../firebase';
 
 const { Content } = Layout;
 
@@ -26,6 +28,7 @@ const classes = [
 ];
 
 function Dashboard() {
+
     return (
         <Layout style={{ minHeight: "100vh" }}>
             <Content style={{ margin: "24px" }}>
@@ -41,7 +44,7 @@ function Dashboard() {
                             ))}
                         </Row>
                     </Col>
-                    <Col span={6}>Test</Col>
+                    <Col span={6}><Link className = "link" to='/Logout'>Logout</Link></Col>
                 </Row>
             </Content>
         </Layout>

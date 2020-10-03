@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Editor from "./components/Editor";
 import "./App.css";
 import Dashboard from "./components/Dashboard";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Logout from "./components/Logout";
 
 class App extends React.Component {
   constructor(props) {
@@ -30,8 +33,17 @@ class App extends React.Component {
             <Route path="/editor">
               <Editor />
             </Route>
-            <Route path="/">
+            <Route path="/register">
+              <Register />
+            </Route>
+            <Route path="/dashboard">
               <Dashboard />
+            </Route>
+            <Route path="/logout">
+              <Logout />
+            </Route>
+            <Route path="/">
+              <Login />
             </Route>
           </Switch>
         </Router>
