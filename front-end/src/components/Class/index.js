@@ -1,54 +1,33 @@
 import { ArrowLeftOutlined, PlusOutlined } from "@ant-design/icons";
 import { Layout, Row, Col, Button, Modal, Form, Input, DatePicker } from "antd";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import LectureCard from "./LectureCard";
+import axios from "axios";
 
 const { Content } = Layout;
 
-let courseInfo = {
-    title: "Introduction to Computer Science",
-    description:
-        "Introduction to programming in Python. Topics covered: Functions, loops, arrays, variables, objects",
-    lectures: [
-        {
-            id: 1,
-            title: "Python Basics",
-            date: "9/15/20",
-        },
-        {
-            id: 2,
-            title: "Variables, Loops, Functions",
-            date: "9/15/20",
-        },
-        {
-            id: 3,
-            title: "Object Oriented Python",
-            date: "9/15/20",
-        },
-        {
-            id: 3,
-            title: "Object Oriented Python",
-            date: "9/15/20",
-        },
-        {
-            id: 3,
-            title: "Object Oriented Python",
-            date: "9/15/20",
-        },
-    ],
-};
-
 function Class() {
+    const [info, setInfo] = useState({lectures: []});
     const [visible, setVisible] = useState(false);
     const [form] = Form.useForm();
+    let { classId } = useParams();
+
+    useEffect(() => {
+        async function getClass() {
+            const result = await axios.get(`http://localhost:9000/getLectures?class=${classId}`)
+            setInfo(result.data);
+        }
+
+        getClass();
+    }, [classId])
 
     return (
         <Layout style={{ minHeight: "100vh" }}>
             <Content style={{ margin: "24px" }}>
                 <Link to="/"><ArrowLeftOutlined /> Back to Dashboard</Link>
 
-                <h1>{courseInfo.title}</h1>
+                <h1>{info.name}</h1>
                 <Button
                     type="primary"
                     icon={<PlusOutlined />}
@@ -74,17 +53,19 @@ function Class() {
                         <Form.Item label="Name" name="name" rules={[{required: true, message: "Please set the lecture name"}]}>
                             <Input />
                         </Form.Item>
-                        <Form.Item label="Select date" name="date" rules={[{required: true, message: "Please set the lecture date"}]}>
+                        <Form.Item label="Date" name="date" rules={[{required: true, message: "Please set the lecture date"}]}>
                             <DatePicker />
                         </Form.Item>
                     </Form>
                 </Modal>
                 <Row gutter={[24, 16]}>
-                    {courseInfo.lectures.map((lecture) => (
+                    {info.lectures.map((lecture) => (
                         <Col key={lecture.id} span={8}>
                             <LectureCard
                                 title={lecture.title}
                                 date={lecture.date}
+                                id={lecture.id}
+                                classId={classId}
                             />
                         </Col>
                     ))}
