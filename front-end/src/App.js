@@ -3,9 +3,12 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Editor from "./components/Editor";
 import "./App.css";
 import Dashboard from "./components/Dashboard";
+
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Logout from "./components/Logout";
+import Class from "./components/Class";
+import Lecture from "./components/Lecture";
 
 class App extends React.Component {
   constructor(props) {
@@ -29,7 +32,10 @@ class App extends React.Component {
         <p>{this.state.apiResponse}</p>
         <Router>
           <Switch>
-            {/* TODO: Add route for root, e.g "/" and render homepage component */}
+            // TODO: Add route for root, e.g "/" and render homepage component
+            <Route exact path="/">
+              <Dashboard />
+            </Route>
             <Route path="/editor">
               <Editor />
             </Route>
@@ -38,6 +44,11 @@ class App extends React.Component {
             </Route>
             <Route path="/dashboard">
               <Dashboard />
+            <Route path="/class/:id/:lectureId">
+              <Lecture />
+            </Route>
+            <Route path="/class/:id">
+              <Class />
             </Route>
             <Route path="/logout">
               <Logout />
