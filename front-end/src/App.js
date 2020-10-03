@@ -28,11 +28,11 @@ class App extends React.Component {
         <Router>
           <Switch>
             // TODO: Add route for root, e.g "/" and render homepage component
+            <Route path="/">
+              <Dashboard />
+            </Route>
             <Route path="/editor">
               <Editor />
-            </Route>
-            <Route path="/dashboard">
-              <Dashboard />
             </Route>
           </Switch>
         </Router>

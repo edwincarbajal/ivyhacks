@@ -2,7 +2,6 @@ import React from "react";
 import { Card } from "antd";
 import {
     ArrowRightOutlined,
-    BookOutlined,
     BookTwoTone,
     CloseOutlined,
     LinkOutlined,

@@ -1,9 +1,6 @@
-import { CloudDownloadOutlined, DownOutlined, EyeFilled, EyeOutlined, UpOutlined } from "@ant-design/icons";
-import { Card, Col, Layout, Row, Avatar } from "antd";
+import { Col, Layout, Row } from "antd";
 import React from "react";
 import CourseCard from "./CourseCard";
-import LectureCard from "./LectureCard";
-import NotesCard from "./NotesCard";
 
 const { Content } = Layout;
 
@@ -26,14 +23,6 @@ const classes = [
         title: "Introduction to Economics",
         description: "Psychology at a large scale, introductory micro and macro economic material"
     },
-    {
-        title: "Introduction to Economics",
-        description: "Psychology at a large scale, introductory micro and macro economic material"
-    },
-    {
-        title: "Introduction to Economics",
-        description: "Psychology at a large scale, introductory micro and macro economic material"
-    },
 ];
 
 function Dashboard() {
@@ -46,7 +35,7 @@ function Dashboard() {
                     <Col span={18}>
                         <Row gutter={[24, 16]}>
                             {classes.map((c) => (
-                                <Col span={8}>
+                                <Col key={c.title} span={8}>
                                     <CourseCard title={c.title} description={c.description} />
                                 </Col>
                             ))}
