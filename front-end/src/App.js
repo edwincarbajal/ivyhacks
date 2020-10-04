@@ -9,6 +9,7 @@ import Register from "./components/Register";
 import Class from "./components/Class";
 import Lecture from "./components/Lecture";
 import ViewNote from "./components/ViewNote";
+import StudyGuide from "./components/StudyGuide";
 
 class App extends React.Component {
   render() {
@@ -27,6 +28,9 @@ class App extends React.Component {
             </Route>
             <Route path="/dashboard">
               <Dashboard />
+            </Route>
+            <Route path="/class/:classId/:lectureId/study-guide">
+              <StudyGuide />
             </Route>
             <Route path="/class/:classId/:lectureId">
               <Lecture />
