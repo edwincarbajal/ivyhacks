@@ -51,12 +51,13 @@ router.post("/", function (req, res, next) {
     }
   }
 
-addContent().then((data) => {
-  console.log("Note content added");
-  res.send(data);
-}).catch((err) => {
-  res.send("Didnt get data");
+  addContent()
+    .then((data) => {
+      console.log("Note content added");
+      res.send(data);
+    })
+    .catch((err) => {
+      res.send("Didnt get data");
+    });
 });
-
-
 module.exports = router;
