@@ -7,7 +7,6 @@ router.get("/", function(req, res, next) {
     try {
       let res = await db.get(req.query.class);
 
-
       let lecture = res.lectures[req.query.lecture];
 
       let result = {
@@ -16,7 +15,7 @@ router.get("/", function(req, res, next) {
         course: res.name,
         notes: lecture.notes,
       }
-      console.log(result);
+      console.log(result.notes);
 
       return JSON.stringify(result);
 
