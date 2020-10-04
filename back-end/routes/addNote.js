@@ -12,7 +12,8 @@ router.post("/", function(req, res, next) {
         "author": req.body.author,
         "sections": [],
         "content": [],
-        "votes":[]
+        "votes":[],
+        "tags": []
       };
 
       doc.lectures[req.body.lectureID].notes.push(newNote);

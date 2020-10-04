@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { db } = require("../db");
+const { db, watson } = require("../db");
 
 function addSpaces(html) {
   let result = [];
@@ -25,8 +25,27 @@ router.post("/", function (req, res, next) {
       var notes = doc.lectures[req.body.lectureID].notes[req.body.noteID];
 
       let reqContent = req.body.content;
+      console.log(reqContent);
 
       let result = addSpaces(reqContent);
+
+      try {
+          let watsonResult = await watson.analyze({
+              html: reqContent,
+              features: {
+                  concepts: {
+                      limit: 3,
+                  },
+              },
+          });
+          watsonResult = watsonResult.result.concepts;
+          const tags = watsonResult.map(res => res.text.toLowerCase())
+          console.log(tags);
+          doc.lectures[req.body.lectureID].notes[req.body.noteID].tags = tags;
+      } catch (err) {
+        console.log("Watson failed.");
+        console.log(err);
+      }
 
       result = result + " <h2>"; //need this at the end
       var sections = result.match(/(?<=<h2>\s+).*?(?=\s+<\/h2>)/gs);
