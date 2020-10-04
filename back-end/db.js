@@ -22,8 +22,4 @@ const conn = Cloudant({
 
 const db = conn.db.use("ivy-hacks");
 
-watson.analyze(analyzeParams).then(results => {
-  console.log(results.result.concepts);
-}).catch(err => console.log(err));
-
 module.exports = { db, watson };
