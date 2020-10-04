@@ -20,7 +20,7 @@ router.get("/", function(req, res, next) {
       var maxIDX = []; //idx of the sections with most votes
 
       for(var j = 0; j < votes[0].length; j++) {
-        var maxNumb = votes[0][0];
+        var maxNumb = votes[0][j];
         var tmpIDX = 0;
 
         for(var i = 0; i < votes.length; i++) {
