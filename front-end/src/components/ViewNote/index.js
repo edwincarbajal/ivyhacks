@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Layout, Typography } from "antd";
+import { BackTop, Button, Layout, Typography } from "antd";
 import styles from "./ViewNote.module.css";
 import { ArrowLeftOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
 import axios from "axios";
@@ -112,6 +112,7 @@ function ViewNote() {
                         </div>
                     ))}
                 </div>
+                <BackTop />
             </Content>
         </Layout>
     );
