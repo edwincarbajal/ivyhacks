@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { db } = require("../db");
+const { db, watson } = require("../db");
 
 function addSpaces(html) {
   let result = [];
@@ -27,6 +27,20 @@ router.post("/", function (req, res, next) {
       let reqContent = req.body.content;
 
       let result = addSpaces(reqContent);
+      const watsonResult = await watson.analyze({
+        html: req.body.content,
+        features: {
+          concepts: {
+            limit: 3
+          }
+        }
+      })
+
+      const tags = watsonResult.map(res => res.text.toLowerCase())
+      doc.lectures[req.body.lectureID].notes[req.body.noteID].tags = tags;
+      console.log(tags);
+
+      content = content + " <h2>"; //need this at the end
 
       result = result + " <h2>"; //need this at the end
       var sections = result.match(/(?<=<h2>\s+).*?(?=\s+<\/h2>)/gs);
