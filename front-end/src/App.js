@@ -8,27 +8,12 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Class from "./components/Class";
 import Lecture from "./components/Lecture";
+import ViewNote from "./components/ViewNote";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { apiResponse: "" };
-  }
-
-  getData() {
-    fetch("http://localhost:9000/getLectures?class=CSC:323")
-  .then(res=>res.text())
-  .then(res=>this.setState({apiResponse: res}));
-}
-
-  componentDidMount() {
-    this.getData();
-  }
-
   render() {
     return (
       <div className="App">
-        <p>{this.state.apiResponse}</p>
         <Router>
           <Switch>
             <Route exact path="/">
@@ -48,6 +33,9 @@ class App extends React.Component {
             </Route>
             <Route path="/class/:classId">
               <Class />
+            </Route>
+            <Route path="/note/:classId/:lectureId/:noteId">
+              <ViewNote />
             </Route>
             <Route path="/Login">
               <Login />
