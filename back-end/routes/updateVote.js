@@ -9,11 +9,7 @@ router.post("/", function(req, res, next) {
       var votes = doc.lectures[req.body.lectureID].notes[req.body.noteID].votes[req.body.sectionID];
 
       if(req.body.type == -1) { //downvote
-        if(votes == 0) {
-          return false;
-        } else {
-          doc.lectures[req.body.lectureID].notes[req.body.noteID].votes[req.body.sectionID]--;
-        }
+        doc.lectures[req.body.lectureID].notes[req.body.noteID].votes[req.body.sectionID]--;
       } else if (req.body.type == 1) { //upvote
         doc.lectures[req.body.lectureID].notes[req.body.noteID].votes[req.body.sectionID]++;
       }
