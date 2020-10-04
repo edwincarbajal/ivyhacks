@@ -15,6 +15,7 @@ addClassRouter = require ("./routes/addClass");
 addLectureRouter = require ("./routes/addLecture");
 addNoteRouter = require ("./routes/addNote");
 updateVoteRouter = require ("./routes/updateVote");
+addContentRouter = require ("./routes/addContent");
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use("/addClass", addClassRouter);
 app.use("/addLecture", addLectureRouter);
 app.use("/addNote", addNoteRouter);
 app.use("/updateVote", updateVoteRouter);
+app.use("/addContent", addContentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

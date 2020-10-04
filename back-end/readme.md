@@ -22,8 +22,15 @@ http://localhost:9000/getNotes?class=id&lecture=id
 **Add Note** <br>
 ```
 <input  type="text" name="classID"/>
+<input  type="text" name="lectureID"/>
 <input  type="text" name="author"/>
-<input  type="text" name="data"/>
+```
+**Add Content** <br>
+```
+<input  type="text" name="classID"/>
+<input  type="text" name="lectureID"/>
+<input  type="text" name="noteID"/>
+<input  type="text" name="content"/>
 ```
 **Update Vote** <br>
 ```
