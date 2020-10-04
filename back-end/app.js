@@ -41,6 +41,7 @@ app.use("/addLecture", addLectureRouter);
 app.use("/addNote", addNoteRouter);
 app.use("/updateVote", updateVoteRouter);
 app.use("/getMain", getMainRouter);
+app.use("/addContent", addContentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

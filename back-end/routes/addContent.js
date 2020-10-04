@@ -19,6 +19,7 @@ function addSpaces(html) {
 }
 
 router.post("/", function (req, res, next) {
+  console.log("HI!!*&#@!*(#");
   async function addContent() {
     try {
       let doc = await db.get(req.body.classID);
