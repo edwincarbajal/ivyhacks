@@ -1,7 +1,7 @@
+import { Button, Form, Input } from "antd";
 import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import fire from "../../firebase";
-import "./login.css";
 
 const LoginForm = () => {
   const [user, setUser] = useState("");
@@ -23,11 +23,11 @@ const LoginForm = () => {
     setPasswordError("");
   };
 
-  const handleLogin = () => {
+  const handleLogin = (values) => {
     clearErrors();
     fire
       .auth()
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(values.email, values.password)
       .catch((err) => {
         switch (err.code) {
           case "auth/invalid-email":
@@ -69,45 +69,41 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="LoginForm">
-      <label> Email </label>
-      <input
-        type="text"
-        autoFocus
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <p>{emailError}</p>
-      <label> Password </label>
-      <input
-        type="password"
-        required
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <p>{passwordError}</p>
-      <input
-        onClick={handleLogin}
-        className="submit-btn"
-        type="submit"
-        value="Login"
-      />
-    </div>
+      <div className="auth-container">
+          <Form onFinish={(values) => handleLogin(values)}>
+              <h1>Login to Recall</h1>
+              <Form.Item
+                  label="Email"
+                  name="email"
+                  rules={[{ required: true, message: "Please provide email" }]}
+              >
+                  <Input type="email" />
+              </Form.Item>
+              <p>{emailError}</p>
+              <Form.Item
+                  label="Password"
+                  name="password"
+                  rules={[
+                      { required: true, message: "Please provide password" },
+                  ]}
+              >
+                  <Input type="password" />
+              </Form.Item>
+
+                <p>{passwordError}</p>
+              <Form.Item>
+                <Button type="primary" htmlType="submit" size="large" shape="round">Login</Button>
+              </Form.Item>
+              <Link to="/register">Don't have an account?</Link>
+          </Form>
+      </div>
   );
 };
 
 function Login() {
   return (
     <div className="login">
-      <h1 className="title">Collab Notes - LOGIN</h1>
       <LoginForm />
-      <p className="prompt-create-user clickable">
-        {" "}
-        <Link className="link" to="/Register">
-          Don't Have an Account?
-        </Link>
-      </p>
     </div>
   );
 }
