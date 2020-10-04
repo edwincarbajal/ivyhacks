@@ -31,7 +31,7 @@ http://localhost:9000/getNotes?class=id&lecture=id
 <input  type="text" name="lectureID"/>
 <input  type="text" name="noteID"/>
 <input  type="text" name="sectionID"/>
-<input  type= number name="type"/>
+<input  type="text" name="type"/>
 ```
 upvote: type = 1 <br>
 downvote: type = -1
