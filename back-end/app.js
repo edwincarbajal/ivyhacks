@@ -16,6 +16,7 @@ addLectureRouter = require ("./routes/addLecture");
 addNoteRouter = require ("./routes/addNote");
 updateVoteRouter = require ("./routes/updateVote");
 addContentRouter = require ("./routes/addContent");
+
 var app = express();
 
 // view engine setup

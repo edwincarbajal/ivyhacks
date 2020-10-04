@@ -7,7 +7,7 @@ import {
 import { Card, Col, Layout, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import NotesCard from "../Dashboard/NotesCard";
+import NotesCard from "./NotesCard";
 import axios from "axios";
 
 const { Content } = Layout;
@@ -33,7 +33,9 @@ function Lecture() {
                 <Link to={`/class/${classId}`}>
                     <ArrowLeftOutlined /> Back to {lecture.course}
                 </Link>
-                <h1>{lecture.title} - {lecture.course}</h1>
+                <h1>
+                    {lecture.title} - {lecture.course}
+                </h1>
                 <Row gutter={[24, 16]}>
                     <Col span={8}>
                         <Card
@@ -50,9 +52,15 @@ function Lecture() {
                             ></Card.Meta>
                         </Card>
                     </Col>
-                    {lecture.notes.map((note) => (
-                        <Col key={note.id} span={8}>
-                            <NotesCard author={note.author} date="Student" />
+                    {lecture.notes.map((note, i) => (
+                        <Col key={i} span={8}>
+                            <NotesCard
+                                author={note.author}
+                                date="Student"
+                                classId={classId}
+                                lectureId={lectureId}
+                                id={i}
+                            />
                         </Col>
                     ))}
                 </Row>
