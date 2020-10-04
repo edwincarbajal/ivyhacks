@@ -120,6 +120,7 @@ function Lecture() {
                 classId={classId}
                 lectureId={lectureId}
                 id={i}
+                tags={note.tags}
               />
             </Col>
           ))}
