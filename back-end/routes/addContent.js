@@ -19,7 +19,7 @@ function addSpaces(html) {
 }
 
 router.post("/", function (req, res, next) {
-  async function updateVote() {
+  async function addContent() {
     try {
       let doc = await db.get(req.body.classID);
       var notes = doc.lectures[req.body.lectureID].notes[req.body.noteID];
@@ -51,14 +51,12 @@ router.post("/", function (req, res, next) {
     }
   }
 
-  updateVote()
-    .then((data) => {
-      console.log("Note content updated");
-      res.send(data);
-    })
-    .catch((err) => {
-      res.send("Didnt get data");
-    });
+addContent().then((data) => {
+  console.log("Note content added");
+  res.send(data);
+}).catch((err) => {
+  res.send("Didnt get data");
 });
+
 
 module.exports = router;

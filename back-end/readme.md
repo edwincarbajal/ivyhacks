@@ -5,6 +5,9 @@ http://localhost:9000/getClasses <br>
 http://localhost:9000/getLectures?class=id <br>
 **Get notes**<br>
 http://localhost:9000/getNotes?class=id&lecture=id
+**Get main note**<br>
+http://localhost:9000/getNotes?classID=id&lectureID=id
+
 ## POST 🏎️
 <i>Important:</i> <u>classID</u> must be in format => ABC:123<br><br>
 **Add Class** <br>
