@@ -11,7 +11,8 @@ router.post("/", function(req, res, next) {
       const newNote = {
         "author": req.body.author,
         "sections": [],
-        "texts": []
+        "content": [],
+        "votes":[]
       };
 
       doc.lectures[req.body.lectureID].notes.push(newNote);
