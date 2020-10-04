@@ -22,7 +22,7 @@ function NotesCard({ author, date, classId, lectureId, id }) {
             <Card.Meta
                 title={author}
                 description={date}
-                avatar={<Avatar>{getInitials(author)}</Avatar>}
+                avatar={<Avatar style={{backgroundColor: "#3e61de"}}>{getInitials(author)}</Avatar>}
             ></Card.Meta>
         </Card>
     );
