@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-import { BackTop, Button, Layout, Typography } from "antd";
+import { BackTop, Layout, Typography } from "antd";
 import styles from "../ViewNote/ViewNote.module.css";
-import { ArrowLeftOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
@@ -26,7 +26,6 @@ function StudyGuide() {
     class: classTitle,
     authors,
     content,
-    lecture,
     sections,
     title: lectureTitle,
   } = data;
