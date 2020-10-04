@@ -19,7 +19,7 @@ class App extends React.Component {
             <Route exact path="/">
               <Dashboard />
             </Route>
-            <Route path="/editor">
+            <Route path="/edit/:classId/:lectureId/:noteId">
               <Editor />
             </Route>
             <Route path="/register">
@@ -27,7 +27,7 @@ class App extends React.Component {
             </Route>
             <Route path="/dashboard">
               <Dashboard />
-              </Route>
+            </Route>
             <Route path="/class/:classId/:lectureId">
               <Lecture />
             </Route>
