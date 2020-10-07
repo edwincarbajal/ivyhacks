@@ -42,7 +42,7 @@ function Lecture() {
 
   useEffect(() => {
     getData();
-  }, [classId, getData, lectureId]);
+  }, [classId, lectureId]);
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
